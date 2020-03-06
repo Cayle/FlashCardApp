@@ -25,12 +25,21 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="44dp"
+        android:layout_alignTop="@+id/flashcard_question"
         android:background="@android:color/holo_green_light"
         android:gravity="center"
         android:text="Barrack Obama"
         android:textColor="@color/colorPrimary"
         android:textSize="36sp"
         android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/myBtn"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="11dp"
+        android:layout_marginEnd="28dp"
+        android:src="@drawable/add_icon" />
 </RelativeLayout>
