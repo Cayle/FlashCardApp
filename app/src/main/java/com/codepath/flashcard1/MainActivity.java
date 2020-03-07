@@ -7,8 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
+    FlashcardDatabase flashcardDatabase;
+    List<Flashcard> allFlashcards;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -20,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
             ((TextView) findViewById(R.id.flashcard_question)).setText(newQuestion);
             ((TextView) findViewById(R.id.flashcard_answer)).setText(newAnswer);
+
+            flashcardDatabase.insertCard(new Flashcard(newQuestion, newAnswer));
+            allFlashcards = flashcardDatabase.getAllCards();
         }
         else {
             setContentView(R.layout.activity_main);
@@ -29,6 +36,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        flashcardDatabase = new FlashcardDatabase(getApplicationContext());
+
+         flashcardDatabase = new FlashcardDatabase(this);
+        allFlashcards = flashcardDatabase.getAllCards();
+
+        if (allFlashcards != null && allFlashcards.size() > 0) {
+            ((TextView) findViewById(R.id.flashcard_question)).setText(allFlashcards.get(0).getQuestion());
+            ((TextView) findViewById(R.id.flashcard_answer)).setText(allFlashcards.get(0).getAnswer());
+        }
 
         findViewById(R.id.flashcard_question).setOnClickListener(new View.OnClickListener() {
             @Override
