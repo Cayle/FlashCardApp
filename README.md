@@ -5,9 +5,11 @@
 ### App Description
 `TODO://` User can add multiple flashcards to the database.
 
+
 ### App Walk-though
 
-<img src="https://i.imgur.com/vHcCsQp.mp4" width=200><br>
+[Link to video walkthrough]
+(https://i.imgur.com/vHcCsQp.mp4)
 
 ## Required
 - [x] User can create a card and still see their created card when the app is relaunched.
