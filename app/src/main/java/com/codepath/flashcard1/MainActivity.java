@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     FlashcardDatabase flashcardDatabase;
     List<Flashcard> allFlashcards;
+    int currentCardDisplayedIndex = 1;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -39,14 +40,17 @@ public class MainActivity extends AppCompatActivity {
 
         flashcardDatabase = new FlashcardDatabase(getApplicationContext());
 
-         flashcardDatabase = new FlashcardDatabase(this);
+        flashcardDatabase = new FlashcardDatabase(this);
         allFlashcards = flashcardDatabase.getAllCards();
 
         if (allFlashcards != null && allFlashcards.size() > 0) {
-            ((TextView) findViewById(R.id.flashcard_question)).setText(allFlashcards.get(0).getQuestion());
-            ((TextView) findViewById(R.id.flashcard_answer)).setText(allFlashcards.get(0).getAnswer());
+            ((TextView) findViewById(R.id.flashcard_question)).setText(allFlashcards.get(1).getQuestion());
+            ((TextView) findViewById(R.id.flashcard_answer)).setText(allFlashcards.get(1).getAnswer());
         }
 
+        String s = "";
+        for(Flashcard f: allFlashcards) s+= f.getAnswer() + " ";
+        Log.d("DATABASE", s);
         findViewById(R.id.flashcard_question).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +79,24 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("question", theQuestion);
                 Log.i("check", theQuestion);
                 startActivityForResult(intent, 100);
+            }
+        });
+
+        findViewById(R.id.next_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // advance our pointer index so we can show the next card
+                currentCardDisplayedIndex++;
+
+                // make sure we don't get an IndexOutOfBoundsError if we are viewing the last indexed card in our list
+                if (currentCardDisplayedIndex > allFlashcards.size() - 1) {
+                    currentCardDisplayedIndex = 0;
+                }
+
+                // set the question and answer TextViews with data from the database
+                ((TextView) findViewById(R.id.flashcard_question)).setText(allFlashcards.get(currentCardDisplayedIndex).getQuestion());
+                ((TextView) findViewById(R.id.flashcard_answer)).setText(allFlashcards.get(currentCardDisplayedIndex).getAnswer());
+
             }
         });
 
