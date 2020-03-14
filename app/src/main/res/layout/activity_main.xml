@@ -16,7 +16,7 @@
         android:layout_marginTop="24dp"
         android:background="?attr/colorPrimary"
         android:gravity="center"
-        android:text="Who is the 44th president of the United States ?"
+        android:text="@string/question_tab"
         android:textColor="@android:color/darker_gray"
         android:textSize="36sp" />
 
@@ -28,7 +28,7 @@
         android:layout_alignTop="@+id/flashcard_question"
         android:background="@android:color/holo_green_light"
         android:gravity="center"
-        android:text="Barrack Obama"
+        android:text="@string/answer_tab"
         android:textColor="@color/colorPrimary"
         android:textSize="36sp"
         android:visibility="invisible" />
@@ -41,13 +41,16 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="11dp"
         android:layout_marginEnd="28dp"
+        android:contentDescription="@string/desc_one"
         android:src="@drawable/add_icon" />
 
     <ImageView
         android:id="@+id/next_btn"
         android:layout_width="115dp"
         android:layout_height="89dp"
-        android:layout_above="@+id/myBtn"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginBottom="144dp"
+        android:contentDescription="@string/desc_two"
         app:srcCompat="@drawable/next_btn" />
 </RelativeLayout>
